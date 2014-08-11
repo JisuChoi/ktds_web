@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
+
+compileJava{
+	options.encoding='UTF-8'
+}
+
+eclipse{
+	wtp{
+		facet{
+			facet name: 'jst.web', version: '3.0'
+			facet name: 'jst.java', version: '1.7'
+		}
+	}
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+    	dirs 'lib'
+    }
+}
+
+dependencies {
+		providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+		compile 'org.springframework:spring-context:4.0.6.RELEASE'
+		compile 'org.reflections:reflections:0.9.9-RC1'
+    compile name: 'ojdbc14'
+		compile name: 'cos'
+    compile 'javax.servlet:jstl:1.2'
+}

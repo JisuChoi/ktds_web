@@ -4,15 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import kt.c.util.ConnectionFactory;
+import javax.sql.DataSource;
+
 import kt.c.vo.LoginVO;
 
 public class LoginDAO {
 	
-	ConnectionFactory connectionFactory;
-
-	public void setConnectionFactory(ConnectionFactory connectionFactory) {
-		this.connectionFactory = connectionFactory;
+	DataSource dataSource;
+	
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 	
 	public LoginVO login(LoginVO loginVO) throws Exception {
@@ -30,7 +31,7 @@ public class LoginDAO {
 		ResultSet rs = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, loginVO.getId());
 			pstmt.setString(2, loginVO.getPassword());
@@ -51,8 +52,12 @@ public class LoginDAO {
 			try {
 				rs.close();
 				pstmt.close();
-				connectionFactory.returnConnection(con);
-			} catch (Exception e) {}
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
+			} catch (Exception e) {
+			}
 		}
 	}
 }

@@ -6,16 +6,18 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import kt.c.util.ConnectionFactory;
+import javax.sql.DataSource;
+
 import kt.c.vo.BoardFileVO;
 import kt.c.vo.BoardVO;
 
 public class BoardDAO {
 
-	ConnectionFactory connectionFactory;
-
-	public void setConnectionFactory(ConnectionFactory connectionFactory) {
-		this.connectionFactory = connectionFactory;
+	// 외부에서 데이터소스 의존객체를 받음
+	DataSource dataSource;
+	
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	public int selectBoardNo() throws Exception {
@@ -29,7 +31,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 
@@ -43,7 +45,10 @@ public class BoardDAO {
 			try {
 				rs.close();
 				pstmt.close();
-				connectionFactory.returnConnection(con);
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
 			} catch (Exception e) {
 			}
 		}
@@ -64,7 +69,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 
@@ -90,7 +95,10 @@ public class BoardDAO {
 			try {
 				rs.close();
 				pstmt.close();
-				connectionFactory.returnConnection(con);
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
 			} catch (Exception e) {
 			}
 		}
@@ -111,7 +119,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, no);
 			rs = pstmt.executeQuery();
@@ -131,7 +139,10 @@ public class BoardDAO {
 			try {
 				rs.close();
 				pstmt.close();
-				connectionFactory.returnConnection(con);
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
 			} catch (Exception e) {
 			}
 		}
@@ -147,7 +158,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
 			int index = 1;
 			pstmt.setInt(index++, board.getNo());
@@ -161,7 +172,10 @@ public class BoardDAO {
 		} finally {
 			try {
 				pstmt.close();
-				connectionFactory.returnConnection(con);
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
 			} catch (Exception e) {
 			}
 		}
@@ -178,7 +192,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sb.toString());
 			pstmt.setInt(1, no);
 			pstmt.executeUpdate();
@@ -187,7 +201,10 @@ public class BoardDAO {
 		} finally {
 			try {
 				pstmt.close();
-				connectionFactory.returnConnection(con);
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
 			} catch (Exception e) {
 			}
 		}
@@ -204,7 +221,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getContent());
@@ -215,7 +232,10 @@ public class BoardDAO {
 		} finally {
 			try {
 				pstmt.close();
-				connectionFactory.returnConnection(con);
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
 			} catch (Exception e) {
 			}
 		}
@@ -231,7 +251,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, no);
 			pstmt.executeUpdate();
@@ -240,7 +260,10 @@ public class BoardDAO {
 		} finally {
 			try {
 				pstmt.close();
-				connectionFactory.returnConnection(con);
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
 			} catch (Exception e) {
 			}
 		}
@@ -257,7 +280,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
 			int index = 1;
 			pstmt.setInt(index++, fileVO.getBoardNo());
@@ -271,7 +294,10 @@ public class BoardDAO {
 		} finally {
 			try {
 				pstmt.close();
-				connectionFactory.returnConnection(con);
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
 			} catch (Exception e) {
 			}
 		}
@@ -292,7 +318,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sb.toString());
 			rs = pstmt.executeQuery();
 			pstmt.setInt(1, boardNo);
@@ -318,7 +344,10 @@ public class BoardDAO {
 			try {
 				rs.close();
 				pstmt.close();
-				connectionFactory.returnConnection(con);
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
 			} catch (Exception e) {
 			}
 		}
@@ -335,7 +364,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			con = connectionFactory.getConnection();
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, boardNo);
 			pstmt.executeUpdate();
@@ -344,7 +373,10 @@ public class BoardDAO {
 		} finally {
 			try {
 				pstmt.close();
-				connectionFactory.returnConnection(con);
+				
+				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
+				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
+				con.close();
 			} catch (Exception e) {
 			}
 		}

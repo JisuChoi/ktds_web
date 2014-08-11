@@ -7,12 +7,12 @@
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container" exported="true"/>
-	<classpathentry kind="lib" path="D:/lecture/mvc-workspace/mvc03/lib/ojdbc14.jar" exported="true">
+	<classpathentry kind="lib" path="C:/Documents and Settings/bitacademy/git/ktds_web2/mvc03/lib/ojdbc14.jar" exported="true">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/lecture/mvc-workspace/mvc03/lib/cos.jar" exported="true">
+	<classpathentry kind="lib" path="C:/Documents and Settings/bitacademy/git/ktds_web2/mvc03/lib/cos.jar" exported="true">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>

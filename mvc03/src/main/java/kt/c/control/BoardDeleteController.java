@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import kt.c.dao.BoardDAO;
 
 public class BoardDeleteController implements Controller {
+	
 	BoardDAO boardDAO;
 	
 	public void setBoardDAO(BoardDAO boardDAO) {
