@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+    
+    <!-- 배열 타입의 프로퍼티 값 설정 -->    
+    <bean id="car01" class="ex03.Car">
+			<property name="model" value="티코"/>
+			<property name="cc" value="800"/>
+			<property name="engine">
+				<bean class="ex03.Engine">
+					<property name="maker" value="기아"/>
+					<property name="horsePower" value="200"/>
+				</bean>
+			</property>
+			<property name="tires">
+				<array>
+					<value>한국타이어1</value>
+					<value>한국타이어2</value>
+					<value>한국타이어3</value>
+					<value>한국타이어4</value>
+				</array>
+			</property>
+		</bean>
+		
+		<!-- 
+				p 스키마를 사용하여 프로퍼티 값을 설정
+				xmlns:p 추가  -> XML 스키마의 위치는 지정하지 않아도 된다. 
+				p:생성자파라미터명="값"
+	  -->
+		<bean id="tire01" class="ex03.Tire" p:diameter="26 inch"/>
+		
+		<!-- c 스키마를 사용하여 프로퍼티 값을 설정 -->
+		<bean id="tire02" class="ex03.Tire" c:diameter="80 inch"/>
+		
+		<!-- List 타입의 프로퍼티 값 설정 -->
+		<bean id="car02" class="ex03.Car">
+			<property name="cdBox">
+				<list>
+					<value>한국타이어1</value>
+					<bean class="ex03.Engine">
+						<property name="maker" value="기아"/>
+						<property name="horsePower" value="200"/>
+					</bean>
+					<value type="java.lang.Integer">900</value>
+					<!-- tire01 이름을 가진 객체 주소를 반환 -->
+					<ref bean="tire01"/>
+					<ref bean="tire02"/>
+				</list>
+			</property>
+		</bean>
+		
+		<bean id="tire03" class="ex03.Tire" p:diameter="24 inch"/>
+		
+		<!-- Map 타입의 프로퍼티 값 설정 -->
+		<bean id="car03" class="ex03.Car">
+			<property name="options">
+				<map>
+					<entry>
+						<key><value>airbag</value></key>
+						<value>YES</value>
+					</entry>
+					<entry key="sunroof" value="NO"/>
+					<entry key="spareTire" value-ref="tire03"/>
+					<entry key="spareTire02">
+						<ref bean="tire03"/>
+					</entry>
+					<entry key="spareTire03">
+						<bean class="ex03.Tire" p:diameter="25 inch"/>
+					</entry>
+				</map>
+			</property>
+		</bean>
+</beans>

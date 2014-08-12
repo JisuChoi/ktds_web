@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+    
+    <context:component-scan base-package="ex06"/>
+    
+    <bean id="engine01" class="ex06.Engine">
+    	<property name="maker" value="기아자동차"/>
+    	<property name="horsePower" value="300"/>
+    </bean>
+    <bean id="engine02" class="ex06.Engine">
+    	<property name="maker" value="현대자동차"/>
+    	<property name="horsePower" value="275"/>
+    </bean>
+    <bean id="engine03" class="ex06.Engine">
+    	<property name="maker" value="포드자동차"/>
+    	<property name="horsePower" value="550"/>
+    </bean>
+    
+    <bean id="engine04" class="ex06.Engine">
+    	<property name="maker" value="오호라 자동차"/>
+    </bean>
+    
+</beans>

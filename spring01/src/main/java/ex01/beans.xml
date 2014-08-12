@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+ 	
+ 	<!-- 
+ 			<bean>: bean 생성하는 명령
+ 			id: bean을 IoC 컨테이너에 저장할 때 사용할 키
+ 			name: bean의 별명
+ 			class: bean 타입(패키지명+클래스명=>Fully Qulified Name(QName))
+ 			       ex) java.lang.String
+ 	 -->
+ 	<bean id="car01" class="ex01.Car"/>
+ 	
+ 	<!-- 
+ 			호출될 생성자 지정하기 -> 생성자의 파라미터 값을 설정
+ 			이때, xml에 설정된 문자열 값을 자동으로 파라미터 타입으로 변환된다.
+ 			(자동 변환 가능 타입: 자바 기본 타입)
+ 	-->
+ 	<bean id="car02" class="ex01.Car">
+ 		<constructor-arg>
+ 			<value>tico</value>
+ 		</constructor-arg>
+ 		<constructor-arg>
+ 			<value>700</value>
+ 		</constructor-arg>
+ 	</bean>
+ 	
+ 	<!-- 단축 문법 -->
+ 	<bean id="car03" class="ex01.Car">
+ 		<constructor-arg value="sonata"/>
+ 		<constructor-arg value="1998"/>
+ 	</bean>
+ 	
+ 	<!-- index 설정 -->
+ 	<bean id="car04" class="ex01.Car">
+ 		<constructor-arg index="1" value="3000"/>
+ 		<constructor-arg index="0" value="그랜져"/>
+ 	</bean>
+ 	
+ 	<!-- 
+ 			setter 호출
+ 			- property 이름: setter/getter 메소드에서 set/get 제거하고 나머지 첫 알파벳을
+ 			                                            소문자로 변환한 이름
+ 			                 ex) getModel()/setModel() => model
+ 			              ** 인스턴스 변수는 property가 아니다!
+ 			  <property name="cc">880</property> // error!
+  -->
+ 	<bean id="car05" class="ex01.Car">
+ 		<property name="model">
+ 			<value>tico</value>
+ 		</property>
+ 		<property name="cc">
+ 			<value>880</value>
+ 		</property>
+ 	</bean>
+ 	
+ 	<bean id="car06" class="ex01.Car">
+ 		<property name="model" value="bmw"/>
+ 		<property name="cc" value="2500"/>
+ 	</bean>
+ 	
+</beans>
