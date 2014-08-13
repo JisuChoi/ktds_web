@@ -8,7 +8,6 @@ public class Test11 {
 	  ApplicationContext 
   	ctx = new ClassPathXmlApplicationContext("ex04/beans.xml");
 	  
-	  // ** 선호
 	  Object bean = ctx.getBean("car01");
 	  System.out.println(bean.getClass().getName());
 	  
@@ -16,7 +15,6 @@ public class Test11 {
 	  System.out.println(bean2.getClass().getName());
 	  System.out.println(bean2);
 	  
-	  // ** 선호
 	  Object bean3 = ctx.getBean("car03");
 	  System.out.println(bean3.getClass().getName());
 	  System.out.println(bean3);

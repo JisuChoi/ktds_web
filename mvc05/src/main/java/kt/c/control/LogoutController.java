@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
-@Component("/auth/logout.do")
-public class LogoutController implements Controller {
+//@Component("/auth/logout.do")
+public class LogoutController implements ControllerX {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 	    throws Exception {

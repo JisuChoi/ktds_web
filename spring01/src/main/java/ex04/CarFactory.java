@@ -6,6 +6,7 @@ package ex04;
  */
 public class CarFactory {
 	public static Car createCar(String model){
+		
 		Car car = new Car();
 		
 		if(model.equals("tico")){

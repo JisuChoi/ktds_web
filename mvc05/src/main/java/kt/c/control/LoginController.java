@@ -8,19 +8,24 @@ import kt.c.vo.LoginVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@Component("/auth/login.do")
-public class LoginController implements Controller {
+//클래스 선언부에서 기본 URL을 지정하고, 요청 핸들러(메소드)에서는 나머지 URL 지정
+//@Controller
+@RequestMapping("/auth")
+public class LoginController {
 	@Autowired
 	LoginDAO loginDAO = new LoginDAO();
-
-	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response)
-	    throws Exception {
-		
-		if(request.getMethod().equals("GET")){
-			return "/view/auth/login.jsp";
-		} else { // POST
+	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String loginForm() throws Exception {
+		return "/view/auth/login.jsp";
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String execute(HttpServletRequest request) throws Exception {
 			LoginVO userVO = loginDAO.login(
 												new LoginVO()
 												.setId(request.getParameter("id"))
@@ -32,7 +37,6 @@ public class LoginController implements Controller {
 			} else {
 				return "redirect:login.do";
 			}
-		}
-		
 	}
+
 }

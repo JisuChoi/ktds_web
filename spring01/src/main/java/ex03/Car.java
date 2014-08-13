@@ -6,7 +6,7 @@ import java.util.Map;
 public class Car {
 	String model;
 	int cc;
-	Engine engine; // Car는 engine에 의존하는 의존 객체
+	Engine engine;
 	String[] tires;
 	List<Object> cdBox;
 	Map<String, Object> options;

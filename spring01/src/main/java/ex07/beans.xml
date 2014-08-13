@@ -22,14 +22,14 @@
 		<property name="engine" ref="engine"/>
 	</bean>
 	
-	<bean id="engine" class="ex07.Engine">
+	<bean id="engine2" class="ex07.Engine">
 		<property name="maker" value="기아자동차"/>
 		<property name="horsePower" value="300"/>
 	</bean>
 	
-	<bean id="engine2" class="ex07.Engine">
-		<property name="maker" value="기아자동차"/>
-		<property name="horsePower" value="300"/>
+	<bean id="engine" class="ex07.Engine">
+		<property name="maker" value="현대자동차"/>
+		<property name="horsePower" value="500"/>
 	</bean>
 	
     

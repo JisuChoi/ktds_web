@@ -9,8 +9,8 @@ import kt.c.vo.BoardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("/board/update.do")
-public class BoardUpdateController implements Controller {
+//@Component("/board/update.do")
+public class BoardUpdateController implements ControllerX {
 	@Autowired
 	BoardDAO boardDAO;
 	

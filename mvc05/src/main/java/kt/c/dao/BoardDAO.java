@@ -305,23 +305,24 @@ public class BoardDAO {
 
 		List<BoardFileVO> list = new ArrayList<>();
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("select no, file_ori_name, file_save_name, ");
-		sb.append("       file_size ");
-		sb.append("  from t_board_file ");
-		sb.append(" where board_no = ? ");
-
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 			con = dataSource.getConnection();
+			StringBuilder sb = new StringBuilder();
+			sb.append("select no, file_ori_name, file_save_name, ");
+			sb.append("       file_size ");
+			sb.append("  from t_board_file ");
+			sb.append(" where board_no = ? ");
+
 			pstmt = con.prepareStatement(sb.toString());
-			rs = pstmt.executeQuery();
 			pstmt.setInt(1, boardNo);
 
-			while (rs.next()) {
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
 				int no = rs.getInt("no");
 				String fileOriName = rs.getString("file_ori_name");
 				String fileSaveName = rs.getString("file_save_name");
@@ -332,24 +333,20 @@ public class BoardDAO {
 				fileVO.setFileOriName(fileOriName);
 				fileVO.setFileSaveName(fileSaveName);
 				fileVO.setFileSize(fileSize);
+
 				list.add(fileVO);
+
 			}
 			return list;
-
-		} catch (Exception e) {
+			
+		} catch(Exception e) {
 			throw e;
-		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-				
-				// DataSource로부터 얻은커넥션 객체는 close()를 호출하면, 
-				// DB서버와의 연결을 닫는 것이 아니라 DataSource에게 커넥션 반납
-				con.close();
-			} catch (Exception e) {
-			}
-		}
 
+		} finally {
+			try {rs.close();} catch (Exception e) {}
+			try {pstmt.close();} catch (Exception e) {}
+			try {con.close();} catch (Exception e) {}
+		}
 	}
 
 	public void deleteFile(int boardNo) throws Exception {

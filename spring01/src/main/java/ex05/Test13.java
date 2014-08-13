@@ -32,7 +32,7 @@ public class Test13 {
 	  
 	  System.out.println("car3 별명들: ------------------------------------");
 	  // 별명 출력, 이 객체에 부여된 나머지 이름을 모두 출력
-	  String[] car3Alias = ctx.getAliases("car3-1");
+	  String[] car3Alias = ctx.getAliases("car03");
 	  for(String alias : car3Alias){
 	  	System.out.println(alias);
 	  }

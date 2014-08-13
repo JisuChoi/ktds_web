@@ -74,7 +74,7 @@
 			<th>첨부파일</th>
 			<td align="left">
 				<c:forEach var="file" items="${ fileList }" >
-					<a href="../upload/${file.fileSaveName }"
+					<a href="${contextRoot}/upload/${file.fileSaveName }"
 						 target="blink" >
 						<c:out value="${ file.fileOriName }" />
 					</a>&nbsp;

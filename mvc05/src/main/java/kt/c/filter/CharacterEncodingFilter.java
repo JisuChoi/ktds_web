@@ -15,7 +15,6 @@ public class CharacterEncodingFilter implements Filter {
 	@Override
   public void init(FilterConfig filterConfig) throws ServletException {
 		// 필터 작업 수행에 필요한 준비 명령어 작성
-		
   }
 
 	/* 필터에 연결된 URL로 요청이 들어올때마다 수행 */

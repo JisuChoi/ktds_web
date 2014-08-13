@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kt.c.dao.BoardDAO">
+	<!-- select 결과는 VO 객체의 자동 저장된다.
+		컬럼명과 일치하는 프로퍼티에 저장한다.
+		컬럼명과 프로퍼티명이 다르다면, 컬럼명에 프로퍼티 이름과 같은 별명을 붙인다.
+	 -->
+  <!-- <select id="selectAll" resultType="kt.c.vo.BoardVO"> -->
+  <select id="selectAll" resultType="BoardVO">
+    select 
+    	no, 
+    	title, 
+    	writer, 
+    	to_char(reg_date, 'yyyy-mm-dd') regDate 
+    from t_board
+    order by no desc
+  </select>
+  
+  <!-- 파라미터의 타입이 기본형인 경우, in-parameter의 이름은 아무거나 줘도 된다. -->
+  <update id="updateViewCnt" parameterType="int">
+  	update t_board 
+  	  set view_cnt = view_cnt + 1
+  	where no=#{boardNo}
+  </update>
+  
+  <select id="selectByNo" parameterType="int" resultType="BoardVO">
+  	select 
+  		no, 
+  		title, 
+  		writer, 
+  		content, 
+  		view_cnt as viewCnt, 
+  		to_char(reg_date, 'yyyy-mm-dd') as regDate
+  	from t_board 
+  	where no=#{boardNo} 
+  </select>
+  
+  <select id="selectFileBoard" parameterType="int" resultType="BoardFileVO">
+  	select 
+  		no, 
+  		file_ori_name as fileOriName, 
+  		file_save_name as fileSaveName,  
+  		file_size as fileSize
+  	from t_board_file 
+  	where board_no=#{boardNo} 
+  </select>
+  
+  <delete id="deleteFile" parameterType="int">
+  	delete t_board_file
+  	where board_no=#{value}
+  </delete>
+  
+  <delete id="delete" parameterType="int">
+  	delete t_board
+  	where no=#{boardNo}
+  </delete>
+  
+  <select id="selectBoardNo" resultType="int">
+  	select seq_t_board_no.nextval from dual
+  </select>
+  
+  <insert id="insert" parameterType="BoardVO">
+  	insert into t_board(no, title, writer, content )
+  	values (#{no}, #{title}, #{writer}, #{content})
+  </insert>
+  
+  <insert id="insertFile" parameterType="BoardFileVO">
+  	insert into t_board_file(
+  		no, board_no, file_ori_name, file_save_name, file_size)
+  	values (#{no}, #{boardNo}, #{fileOriName}, #{fileSaveName}, #{fileSize})
+  </insert>
+  
+  <update id="update" parameterType="BoardVO">
+  	update t_board set 
+  		title=#{title} 
+  		,content=#{content}
+  	where no=#{no}
+  </update>
+</mapper>
